@@ -1,66 +1,31 @@
 { config, lib, pkgs, ... }:
 {
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "20.09";
 
+  imports = [
+    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
 
-  imports =
-    [
-      <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    ../users/shared.nix
+    ../users/thinkpad.nix
 
-      ../users/shared.nix
-      ../users/manya.nix
+    ../sys/aliases.nix
+    ../sys/fonts.nix
 
-      ../sys/aliases.nix
-      # ../sys/debug.nix
-      ../sys/nix.nix
-      ../sys/scripts.nix
-      ../sys/sysctl.nix
-      ../sys/tty.nix
-      ../sys/vars.nix
-      ../sys/fonts.nix
+    ../boot/systemd.nix
 
-      ../boot/efi.nix
-      ../boot/multiboot.nix
+    ../services/x.nix
+    ../services/bspwm.nix
 
-      ../services/journald.nix
-      ../services/x.nix
-      ../services/postgresql.nix
+    ../packages/chromium.nix
+    ../packages/common.nix
+    ../packages/proprietary.nix
 
-      ../services/x/xmonad.nix
-      ../packages/x-common.nix
-      # ../packages/x-extra.nix
+    ../hardware/intel.nix
+    ../hardware/power-management.nix
+    ../hardware/sound.nix
+    ../hardware/ssd.nix
+  ];
 
-      ../packages/absolutely-proprietary.nix
-      ../packages/common.nix
-      ../packages/dev.nix
-      ../packages/games.nix
-      ../packages/nvim.nix
-      ../packages/tmux.nix
-
-      ../hardware/power-management.nix
-      ../hardware/bluetooth.nix
-      ../hardware/sound.nix
-      ../hardware/mouse.nix
-      ../hardware/ssd.nix
-
-      ../services/net/firewall-desktop.nix
-      ../services/net/fail2ban.nix
-      ../services/net/wireguard.nix
-      ../services/net/i2pd.nix
-      ../services/net/tor.nix
-      ../services/net/sshd.nix
-      ../services/net/nginx.nix
-      ../services/net/openvpn.nix
-
-      ../services/vm/hypervisor.nix
-      # ../services/vm/docker.nix
-    ];
-
-  # Boot
   boot.cleanTmpDir = lib.mkDefault true;
   boot.tmpOnTmpfs = lib.mkDefault true;
   boot.kernelParams = [
@@ -91,7 +56,6 @@
     blacklist btusb
   '';
 
-  # Network
   networking = {
     hostName = "thinkpad";
     interfaces.enp0s25.useDHCP = true;
@@ -99,24 +63,15 @@
     networkmanager.enable = true;
   };
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/df8dcd09-38bd-4632-8041-8219ebdc5571";
-      fsType = "ext4";
-      options = [ "noatime" "nodiratime" ]; # ssd
-    };
-
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/8CCE-4F4F";
-      fsType = "vfat";
-      options = [ "noatime" "nodiratime" ]; # ssd
-    };
-
-  swapDevices = [];
-
-  hardware = {
-    cpu.intel.updateMicrocode = true;
-  };
-  services.xserver.videoDrivers = [ "intel" ];
+  #fileSystems."/" = {
+  #  device = "/dev/disk/by-uuid/df8dcd09-38bd-4632-8041-8219ebdc5571";
+  #  fsType = "ext4";
+  #  options = [ "noatime" "nodiratime" ];
+  #};
+  #fileSystems."/boot" = {
+  #  device = "/dev/disk/by-uuid/8CCE-4F4F";
+  #  fsType = "vfat";
+  #  options = [ "noatime" "nodiratime" ];
+  #};
+  #swapDevices = [];
 }

@@ -10,5 +10,9 @@
       devices = [ "nodev" ];
       efiSupport = true;
     };
+    grub.useOSProber = true;
   };
+
+  environment.systemPackages = with pkgs;
+    [ os-prober ];
 }

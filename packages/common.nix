@@ -19,7 +19,6 @@ in
       '';
     };
 
-    # run xfce4-mime-settings to change with gui
     etc."xdg/mimeapps.list" = {
       text = ''
         [Default Applications]

@@ -26,5 +26,11 @@
       ];
   };
 
+  i18n.defaultLocale = "pt_BR.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "br-abnt2";
+  };
+
   environment.systemPackages = with pkgs;[ font-manager ];
 }

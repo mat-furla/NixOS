@@ -2,7 +2,7 @@
 {
   services.udisks2.enable = true;
   
-  services.gvfs.enable = lib.mkForce false;
+  services.gvfs.enable = lib.mkForce true;
 
   services.xserver = {
     enable = true;

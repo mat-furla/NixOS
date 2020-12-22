@@ -1,4 +1,4 @@
-{ config, pkgs, lib, vars, ... }:
+{ config, pkgs, lib, ... }:
 {
   displayManager.startx.enable = true;
   displayManager.defaultSession = "none+bspwm";
