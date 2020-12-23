@@ -1,9 +1,9 @@
 {
-  #nixpkgs.config = {
-  #  chromium = {
-  #    enableWideVine = true;
-  #  };
-  #};
+  nixpkgs.config = {
+    chromium = {
+      enableWideVine = true;
+    };
+  };
 
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };

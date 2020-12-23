@@ -72,20 +72,20 @@ in
     };
   };
 
-  console.useXkbConfig = true;
-
   environment.systemPackages = with pkgs;
     [
       alacritty           # terminal
       chromium            # web browser
       rofi                # app launcher
+      sxhkd               # keybinds
+      flameshot           # screen capture
       hsetroot            # wallpaper
       mpv                 # media player
       zathura             # pdf viewer
       leafpad             # text editor
-      libreoffice-fresh   # text editor
-      dracula-theme       # gtk theme
+      nnn                 # file manager
       libnotify           # notifications
       dunst               # notifications
+      stow
     ];
 }

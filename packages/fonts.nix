@@ -2,7 +2,6 @@
 {
   fonts = {
     enableDefaultFonts = true;
-    fontDir.enable = true; # ls /run/current-system/sw/share/X11-fonts
     fontconfig = {
       enable = true;
       hinting.enable = true;
@@ -25,12 +24,9 @@
         roboto-mono
       ];
   };
-
-  i18n.defaultLocale = "pt_BR.UTF-8";
+  
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "br-abnt2";
+    useXkbConfig = true;
   };
-
-  environment.systemPackages = with pkgs;[ font-manager ];
 }
